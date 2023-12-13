@@ -1,0 +1,148 @@
+/* style.css */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px auto 0 ;
+    padding: 20px; 
+    background-color: #f4f4f4;
+    max-width: 1000px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+
+}
+
+.cabecalho {
+  display: grid;
+  grid-template-columns: 50% auto;
+  gap: 20px;
+  padding: 10px;
+}
+
+.cabecalho2 {
+  display: grid;
+  grid-template-columns: 50% auto;
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.corpo {
+  display: grid;
+  grid-template-columns: 50% auto;
+  gap: 20px;
+  margin: 10px 0 10px 0;
+}
+
+h2 {
+    font-weight: bold;
+    margin: 10px; 
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+    margin: 10px 0 5px 0; 
+}
+
+h4 {
+    margin: 10px 0 5px 0; 
+}
+
+.topico {
+    font-weight: bold; 
+    margin: 10px 0 10px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+input {
+    width: calc(75% - 12px); 
+    padding: 6px; 
+    margin-bottom: 6px; 
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+button {
+    width: 25%;
+    padding: 8px; 
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 9px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-left: 6px; 
+    transition: background-color 0.3s; 
+}
+
+button:hover {
+    background-color: #2e7da6; 
+}
+
+span, p {
+    /*
+    display: inline-block;
+    margin-bottom: 6px; 
+    */
+    font-size: 14px;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    /*sem formatação*/
+    list-style-type: none;
+    font-size:12px;
+}
+
+#output0 {
+    font-weight: normal; 
+}
+
+#eventos {
+  /*
+    color: #555;
+    font-style: italic;
+    margin-bottom: 8px; 
+    */
+
+}
+
+.rodape {
+    margin-top: 20px; 
+    font-size: 12px;
+}
+
+
+@media screen and (max-width: 600px) {
+    body {
+        max-width: 100%;
+    }
+
+    input, button {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 6px; 
+    }
+}

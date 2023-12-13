@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Titulo Credito</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+</head>
+<body>
+    <div class="top">
+        <h2>Titulos de Crédito</h2>
+    </div>
+
+    <div class="cabecalho">
+      <div>
+        <p>Projeto: Contrato Inteligente para emitir e administrar Títulos de Crédito NFT na rede Ethereum.</p>
+        <p>Através deste contrato será possível Emitir títulos de crédito que poderão ser resgatados futuramente, com juros de 1% ao mês, ou negociados entre os usuários.</p> 
+      </div>
+      <div>
+        <p>O Contrato será remuneado por meio de taxas, que serão:</p>
+        <p>2% do valor do título, quando o título for emitido;</p>
+        <p>1% do valor do título, quando o título for negociado.</p>
+      </div>
+    </div>
+
+    <div class="cabecalho2">
+      <div>
+        <span class="topico">Saldo do Contrato:</span>
+        <span id="output0"></span>
+      </div>
+      <div>
+        <span class="topico">Títulos Emitidos:</span>
+        <span id="titulosEmitidos"></span>
+      </div>
+
+    </div>
+    
+    <div class="corpo">
+      <div class="col1">
+        <h4>Emitir Novo Titulo</h4>
+        <input type="text" id="valor" placeholder="Valor do Título (mínimo = 100)">
+        <button id="btn-emitir">Emitir</button>
+
+        <h4>Definir como Negociavel</h4>
+        <input type="text" id="negociavel" placeholder="ID do Titulo">
+        <button id="btn-negociavel">Definir</button>
+
+        <h4>Comprar Titulo Negociável</h4>
+        <input type="text" id="comprar" placeholder="ID do Titulo">
+        <button id="btn-comprar">Comprar</button>
+
+        <h4>Resgatar Título</h4>
+        <input type="text" id="resgatar" placeholder="ID do Titulo">
+        <button id="btn-resgatar">Resgatar</button>
+      </div>
+
+      <div class="col2">
+        <h4>Detalhar Título</h4>
+        <input type="text" id="detalhar" placeholder="ID do Titulo">
+        <button id="btn-detalhar">Detalhar</button>
+        <br>
+        <h4>Detalhes do Título:</h4>
+        <span id="output2"></span>
+        <br>
+        <!--<span>Valor Atual:</span>-->
+        <span id="output1"></span>
+        <br>
+      </div>
+    </div>
+
+    <div class="rodape" >
+      <span class="topico">Eventos:</span>
+      <br>
+      <ul id="eventos"></ul>
+    </div>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="/abi.js"></script>
+    <script src="/script.js"></script>
+        
+
+</body>
+</html>
