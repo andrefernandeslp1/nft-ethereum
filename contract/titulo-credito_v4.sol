@@ -73,6 +73,7 @@ contract TituloCredito {
     uint256 valorJuros = (titulosPorID[_id].valorInicial * JUROS / 100) * meses;
     payable(msg.sender).transfer(titulosPorID[_id].valorInicial + valorJuros);
     titulosPorID[_id].pago = true;
+    titulosPorID[_id].negociavel = false;
     saldo -= (titulosPorID[_id].valorInicial + valorJuros);
     emit TituloEmitido(_id, msg.sender, titulosPorID[_id].valorInicial + valorJuros, block.timestamp, true, false);
   } 
