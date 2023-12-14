@@ -28,7 +28,7 @@ body {
 .cabecalho {
   display: grid;
   grid-template-columns: 50% auto;
-  gap: 20px;
+  gap: 25px;
   padding: 10px;
 }
 
