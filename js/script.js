@@ -83,7 +83,8 @@ function resgatarTitulo () {
 
 function comprarTituloNegociavel () {
   let _id = document.getElementById("comprar").value;
-  return DApp.contracts.TituloCredito.methods.comprarTituloNegociavel(_id).send({ from: DApp.account }).then(atualizaInterface);
+  let _valor = getValue(_id);
+  return DApp.contracts.TituloCredito.methods.comprarTituloNegociavel(_id).send({ from: DApp.account, value: _valor }).then(atualizaInterface);
 }
 
 function setNegociavel () {
