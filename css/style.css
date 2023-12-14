@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Calibri', sans-serif;
     margin: 20px auto 0 ;
     padding: 20px; 
     background-color: #f4f4f4;
@@ -20,15 +20,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
 
 }
 
 .cabecalho {
   display: grid;
-  grid-template-columns: 50% auto;
-  gap: 20px;
+  grid-template-columns: 48% auto;
+  gap: 35px;
   padding: 10px;
 }
 
@@ -50,7 +50,8 @@ body {
 h2 {
     font-weight: bold;
     margin: 10px; 
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 4px 4px 4px lightgray;
+
 }
 
 h3 {
@@ -102,7 +103,7 @@ span, p {
     display: inline-block;
     margin-bottom: 6px; 
     */
-    font-size: 14px;
+    font-size: 15px;
 }
 
 ul {
@@ -113,11 +114,13 @@ ul {
 li {
     /*sem formatação*/
     list-style-type: none;
-    font-size:12px;
+    font-size:13px;
 }
 
 #output0 {
+  /*
     font-weight: normal; 
+    */
 }
 
 #eventos {
@@ -131,7 +134,7 @@ li {
 
 .rodape {
     margin-top: 20px; 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
