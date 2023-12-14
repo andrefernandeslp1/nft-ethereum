@@ -1,5 +1,5 @@
 // Inicialize o contrato
-var contractAddress = '0x17a76dD1353383830292bB4f80711bD8fF746018';
+var contractAddress = '0x6aF3159Ed7d5652bE5c00D2C351e000569e3bC4D';
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);

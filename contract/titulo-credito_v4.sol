@@ -9,6 +9,7 @@ contract TituloCredito {
   uint256 public JUROS = 1; // 1% ao mês
   uint256 public TAXA_DE_EMISSAO = 2; // 2% do valor do título
   uint256 public TAXA_DE_TRANSFERENCIA = 1; // 1% do valor do título
+  uint256 public TAXA_DE_RESGATE = 1; // 1% do valor do título
   uint256 public saldo = 0;
 
   struct Titulo {
@@ -32,7 +33,7 @@ contract TituloCredito {
   function emitirNovoTitulo(uint256 _valor) public payable {
     uint256 valorTaxado = _valor - (_valor * TAXA_DE_EMISSAO / 100);
     require(msg.value == _valor, "Valor incorreto");
-    require(_valor >= 100, "Valor minimo de 100");
+    require(_valor >= 10, "Valor minimo de 100");
     idTitulo++;
     titulosPorID[idTitulo] = Titulo(idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
     enderecoPorID[idTitulo] = msg.sender;
@@ -71,11 +72,14 @@ contract TituloCredito {
     require(titulosPorID[_id].pago == false, "Titulo ja resgatado");
     uint256 meses = (block.timestamp - titulosPorID[_id].time) / 30 days;
     uint256 valorJuros = (titulosPorID[_id].valorInicial * JUROS / 100) * meses;
-    payable(msg.sender).transfer(titulosPorID[_id].valorInicial + valorJuros);
+    uint256 valorAtual = titulosPorID[_id].valorInicial + valorJuros;
+    uint256 txResgate = valorAtual * TAXA_DE_RESGATE / 100;
+    uint256 valorLiquido = valorAtual - txResgate;
+    payable(msg.sender).transfer(valorLiquido);
     titulosPorID[_id].pago = true;
     titulosPorID[_id].negociavel = false;
-    saldo -= (titulosPorID[_id].valorInicial + valorJuros);
-    emit TituloEmitido(_id, msg.sender, titulosPorID[_id].valorInicial + valorJuros, block.timestamp, true, false);
+    saldo -= (valorLiquido);
+    emit TituloEmitido(_id, msg.sender, valorLiquido, block.timestamp, true, false);
   } 
 
   function getValorAtual(uint256 _id) public view returns (uint256) {
@@ -87,9 +91,13 @@ contract TituloCredito {
   function getTitulo(uint256 _id) public view returns (Titulo memory) {
     return titulosPorID[_id];
   }
-
+/*
   function getSaldo() public view returns (uint256) {
     return saldo;
+  }
+*/
+  function getSaldo() public view returns (uint256) {
+    return address(this).balance;
   }
 
   function getIdTitulo() public view returns (uint256) {

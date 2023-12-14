@@ -281,6 +281,19 @@ var abi = [
 	},
 	{
 		"inputs": [],
+		"name": "TAXA_DE_RESGATE",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "TAXA_DE_TRANSFERENCIA",
 		"outputs": [
 			{
