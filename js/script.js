@@ -57,21 +57,16 @@ const DApp = {
 };
 
 // *** MÉTODOS DO CONTRATO ** //
-
+/*
 function getValorAtual () {
   let _id = document.getElementById("detalhar").value;
   return DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account }).then((result) => {
     document.getElementById("output1").innerHTML = "Valor Atual: " + result + "<br>";
   });
 }
-
-var currentValue;
-/*
-async function getValue (_id) {
-  currentValue =  await DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account });
-  console.log(currentValue);
-}
 */
+var currentValue;
+
 function getValue (_id) {
   return new Promise((resolve, reject) => {
     DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account }).then((result) => {
@@ -99,19 +94,28 @@ function comprarTituloNegociavel () {
   });
 }
 
-
 function setNegociavel () {
   let _id = document.getElementById("negociavel").value;
   return DApp.contracts.TituloCredito.methods.setNegociavel(_id).send({ from: DApp.account }).then(atualizaInterface);
 }
 
 function getTitulo () {
-  getValorAtual();
+  //getValorAtual();
   let _id = document.getElementById("detalhar").value;
-  return DApp.contracts.TituloCredito.methods.getTitulo(_id).call({ from: DApp.account }).then((result) => {
-    document.getElementById("output2").innerHTML = "ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + "<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] ;
-  });
+  getValue(_id).then(() => {
+    console.log(currentValue);
+    return DApp.contracts.TituloCredito.methods.getTitulo(_id).call({ from: DApp.account }).then((result) => {
+      document.getElementById("output2").innerHTML = "<br><b>Detalhes do Título:</b><br>ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + "<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] + "<br> Valor Atual: " + currentValue;
+    });
+  }
+  );
 }
+
+  /*
+  return DApp.contracts.TituloCredito.methods.getTitulo(_id).call({ from: DApp.account }).then((result) => {
+    document.getElementById("output2").innerHTML = "Detalhes do Título:<br>ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + "<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] ;
+  });*/
+
 
 function getSaldo () {
   return DApp.contracts.TituloCredito.methods.getSaldo().call({ from: DApp.account });
@@ -152,7 +156,7 @@ function registraEventos(eventos){
   eventos.forEach(evento => {
     let linha = document.createElement("li");
     linha.innerHTML = 
-      evento.returnValues._operacao +
+      "<b>" +evento.returnValues._operacao + "</b>" +
       " - ID: " + evento.returnValues._id + 
       " - Valor: " + evento.returnValues._valor +
       " - Resgatado: " + evento.returnValues._pago +
