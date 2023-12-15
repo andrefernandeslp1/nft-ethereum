@@ -1,5 +1,5 @@
 // Inicialize o contrato
-var contractAddress = '0x6aF3159Ed7d5652bE5c00D2C351e000569e3bC4D';
+var contractAddress = '0xeFCec97634DEB44934d75C47cfe108FAc3F2Db92';
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -65,7 +65,7 @@ function getValorAtual () {
   });
 }
 
-let currentValue;
+var currentValue;
 
 async function getValue (_id) {
   currentValue =  await DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account });
@@ -79,9 +79,7 @@ function emitirNovoTitulo () {
 
 function resgatarTitulo () {
   let _id = document.getElementById("resgatar").value;
-  getValue(_id);
-  console.log(currentValue);
-  return DApp.contracts.TituloCredito.methods.resgatarTitulo(_id).send({ from: DApp.account, value: currentValue }).then(atualizaInterface);
+  return DApp.contracts.TituloCredito.methods.resgatarTitulo(_id).send({ from: DApp.account }).then(atualizaInterface);
 }
 
 function comprarTituloNegociavel () {
