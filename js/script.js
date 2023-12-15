@@ -66,11 +66,20 @@ function getValorAtual () {
 }
 
 var currentValue;
-
+/*
 async function getValue (_id) {
   currentValue =  await DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account });
   console.log(currentValue);
 }
+*/
+function getValue (_id) {
+  return new Promise((resolve, reject) => {
+    DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account }).then((result) => {
+      currentValue = result;
+      resolve();
+    });
+  });
+} 
 
 function emitirNovoTitulo () {
   let _valor = document.getElementById("valor").value;
@@ -89,6 +98,7 @@ function comprarTituloNegociavel () {
     return DApp.contracts.TituloCredito.methods.comprarTituloNegociavel(_id).send({ from: DApp.account, value: currentValue }).then(atualizaInterface);
   });
 }
+
 
 function setNegociavel () {
   let _id = document.getElementById("negociavel").value;
