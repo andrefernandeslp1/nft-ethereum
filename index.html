@@ -22,10 +22,20 @@
       <div>
         <p>O Contrato será remunerado por meio de taxas, que serão:</p>
         <p>● <b>2%</b> do valor do título, quando o título for <b>emitido</b>;</p>
-        <p>● <b>1%</b> do valor do título, quando o título for <b>negociado</b>. <br>OBS.: Pago pelo <b>comprador</b>.</p>
+        <p>● <b>1%</b> do valor do título, quando o título for <b>negociado</b>; <br>OBS.: Pago pelo <b>comprador</b></p>
         <p>● <b>1%</b> do valor do título, quando o título for <b>resgatado</b>.</p>
       </div>
     </div>
+
+    <fieldset class="cabecalho1">
+      <legend >Restrições:</legend>
+      <div>
+        <p style="margin:5px 0 10px 0">● Somente o portador poderá alterar o status de negociável do título.</p>
+      </div>
+      <div>
+        <p style="margin:5px 0 10px 0">● Somente o portador poderá resgatar o título.</p>
+      </div>
+    </fieldset>
 
     <div class="cabecalho2">
       <div>
@@ -36,7 +46,6 @@
         <span class="topico">Títulos Emitidos:</span>
         <span id="titulosEmitidos"></span>
       </div>
-
     </div>
     
     <div class="corpo">
@@ -45,7 +54,7 @@
         <input type="text" id="valor" placeholder="Valor do Título (mínimo = 100)">
         <button id="btn-emitir">Emitir</button>
 
-        <h4>Definir como Negociável (N)</h4>
+        <h4>Alterar Status Negociável (N)</h4>
         <input type="text" id="negociavel" placeholder="ID do Titulo">
         <button id="btn-negociavel">Definir</button>
 
