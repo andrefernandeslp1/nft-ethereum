@@ -61,6 +61,12 @@ var abi = [
 		"inputs": [
 			{
 				"indexed": false,
+				"internalType": "string",
+				"name": "_operacao",
+				"type": "string"
+			},
+			{
+				"indexed": false,
 				"internalType": "uint256",
 				"name": "_id",
 				"type": "uint256"

@@ -1,5 +1,5 @@
 // Inicialize o contrato
-var contractAddress = '0xeFCec97634DEB44934d75C47cfe108FAc3F2Db92';
+var contractAddress = '0x34A640332C24e0526ED10fa2f8B87ECAB1dE5E9F';
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -69,7 +69,7 @@ var currentValue;
 
 async function getValue (_id) {
   currentValue =  await DApp.contracts.TituloCredito.methods.getValorAtual(_id).call({ from: DApp.account });
-  console.log(currentValue);
+  //console.log(currentValue);
 }
 
 function emitirNovoTitulo () {
@@ -84,8 +84,10 @@ function resgatarTitulo () {
 
 function comprarTituloNegociavel () {
   let _id = document.getElementById("comprar").value;
-  getValue(_id);
-  console.log(currentValue);
+  getValue(_id).then((result) => {
+    currentValue = result;
+  });
+  //console.log(currentValue);
   return DApp.contracts.TituloCredito.methods.comprarTituloNegociavel(_id).send({ from: DApp.account, value: currentValue }).then(atualizaInterface);
 }
 
@@ -141,9 +143,9 @@ function registraEventos(eventos){
   eventos.forEach(evento => {
     let linha = document.createElement("li");
     linha.innerHTML = 
-      "Título: " + evento.returnValues._id + 
+      evento.returnValues._operacao +
+      " - ID: " + evento.returnValues._id + 
       " - Valor: " + evento.returnValues._valor +
-      " - Timestamp: " + evento.returnValues._time + 
       " - Resgatado: " + evento.returnValues._pago +
       " - Negociável: " + evento.returnValues._negociavel +
       " - Transação: " + "<a href='https://sepolia.etherscan.io/tx/"+ evento.transactionHash +"'>" + evento.transactionHash + "</a>";

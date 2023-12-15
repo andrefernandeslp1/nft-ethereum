@@ -24,7 +24,7 @@ contract TituloCredito {
   mapping(uint256 => Titulo) public titulosPorID;
   mapping(uint256 => address) public enderecoPorID;
 
-  event TituloEmitido(uint256 _id, address _portador, uint256 _valor, uint256 _time, bool _pago, bool _negociavel);
+  event TituloEmitido(string _operacao, uint256 _id, address _portador, uint256 _valor, uint256 _time, bool _pago, bool _negociavel);
 
   constructor() {
     owner = msg.sender;
@@ -38,7 +38,7 @@ contract TituloCredito {
     titulosPorID[idTitulo] = Titulo(idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
     enderecoPorID[idTitulo] = msg.sender;
     saldo += _valor;
-    emit TituloEmitido(idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
+    emit TituloEmitido("E", idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
   }
 
   function setNegociavel (uint256 _id) public {
@@ -50,7 +50,7 @@ contract TituloCredito {
     else {
       titulosPorID[_id].negociavel = false;
     }
-    emit TituloEmitido(_id, msg.sender, getValorAtual(_id), block.timestamp, false, titulosPorID[_id].negociavel);
+    emit TituloEmitido("N", _id, msg.sender, getValorAtual(_id), block.timestamp, false, titulosPorID[_id].negociavel);
   }
 
   function comprarTituloNegociavel (uint256 _id) public payable {
@@ -64,7 +64,7 @@ contract TituloCredito {
     titulosPorID[_id] = Titulo(_id, msg.sender, valorLiquido, block.timestamp, false, false);
     enderecoPorID[_id] = msg.sender;
     saldo += txTransferencia;
-    emit TituloEmitido(_id, msg.sender, valorLiquido, block.timestamp, false, false);
+    emit TituloEmitido("C", _id, msg.sender, valorLiquido, block.timestamp, false, false);
   }
 
   function resgatarTitulo(uint256 _id) public payable {
@@ -79,7 +79,7 @@ contract TituloCredito {
     titulosPorID[_id].pago = true;
     titulosPorID[_id].negociavel = false;
     saldo -= (valorLiquido);
-    emit TituloEmitido(_id, msg.sender, valorLiquido, block.timestamp, true, false);
+    emit TituloEmitido("R", _id, msg.sender, valorLiquido, block.timestamp, true, false);
   } 
 
   function getValorAtual(uint256 _id) public view returns (uint256) {
