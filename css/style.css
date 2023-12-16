@@ -29,7 +29,7 @@ body {
   display: grid;
   grid-template-columns: 48% auto;
   gap: 35px;
-  padding: 0px 10px 0 10px;
+  padding: 0px 10px 10px 10px;
 }
 
 .cabecalho1 {
@@ -94,6 +94,23 @@ input {
     display: inline-block;
 }
 
+#btn-sacarSaldo {
+    width: auto;
+    padding: 8px; 
+    background-color: rgba(255, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 9px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-left: -4px;
+    transition: background-color 0.3s; 
+}
+#btn-sacarSaldo:hover {
+    background-color: rgba(255, 0, 0, 0.8); 
+}
+
 button {
     width: 25%;
     padding: 8px; 
@@ -128,7 +145,7 @@ ul {
 li {
     /*sem formatação*/
     list-style-type: none;
-    font-size:14px;
+    font-size:13px;
 }
 
 

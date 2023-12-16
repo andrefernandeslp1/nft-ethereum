@@ -1,5 +1,5 @@
 // Inicialize o contrato
-var contractAddress = '0x34A640332C24e0526ED10fa2f8B87ECAB1dE5E9F';
+var contractAddress = '0x0fA1B00ED1f1d596A30E86B9A3Ea963BEFBdb9e6';
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -83,7 +83,12 @@ function emitirNovoTitulo () {
 
 function resgatarTitulo () {
   let _id = document.getElementById("resgatar").value;
-  return DApp.contracts.TituloCredito.methods.resgatarTitulo(_id).send({ from: DApp.account }).then(atualizaInterface);
+  if (_id == 0) {
+    sacarSaldo();
+  }
+  else {
+    return DApp.contracts.TituloCredito.methods.resgatarTitulo(_id).send({ from: DApp.account }).then(atualizaInterface);
+  }
 }
 
 function comprarTituloNegociavel () {
@@ -105,17 +110,15 @@ function getTitulo () {
   getValue(_id).then(() => {
     console.log(currentValue);
     return DApp.contracts.TituloCredito.methods.getTitulo(_id).call({ from: DApp.account }).then((result) => {
-      document.getElementById("output2").innerHTML = "<br><b>Detalhes do Título:</b><br>ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + "<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] + "<br> Valor Atual: " + currentValue;
+      document.getElementById("output2").innerHTML = "<br><b>Detalhes do Título:</b><br>ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + " wei<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] + "<br> Valor Atual: " + currentValue + " wei";
     });
   }
   );
 }
 
-  /*
-  return DApp.contracts.TituloCredito.methods.getTitulo(_id).call({ from: DApp.account }).then((result) => {
-    document.getElementById("output2").innerHTML = "Detalhes do Título:<br>ID do Título: " + result[0] + "<br> Portador: " + result[1] + "<br> Valor Inicial: " + result[2] + "<br> Timestamp Aquisição: " + result[3] + "<br> Resgatado: " + result[4] + "<br> Negociável: " + result[5] ;
-  });*/
-
+function sacarSaldo () {
+  return DApp.contracts.TituloCredito.methods.sacarSaldo().send({ from: DApp.account }).then(atualizaInterface);
+}
 
 function getSaldo () {
   return DApp.contracts.TituloCredito.methods.getSaldo().call({ from: DApp.account });
@@ -134,6 +137,7 @@ function inicializaInterface() {
   document.getElementById("btn-negociavel").onclick = setNegociavel;
   //document.getElementById("btn-valoratual").onclick = getValorAtual;
   document.getElementById("btn-detalhar").onclick = getTitulo;
+  //document.getElementById("btn-sacarSaldo").onclick = sacarSaldo;
   atualizaInterface();
   //DApp.contracts.TituloCredito.getPastEvents("TituloEmitido", { fromBlock: 0, toBlock: "latest" }).then((result) => registraEventos(result));
   //DApp.contracts.TituloCredito.events.TituloEmitido((error, event) => registraEventos([event]));
@@ -141,7 +145,7 @@ function inicializaInterface() {
 
 function atualizaInterface() {
   getSaldo().then((result) => {
-    document.getElementById("output0").innerHTML = result;
+    document.getElementById("output0").innerHTML = result + " wei";
   });
   getIdTitulo().then((result) => {
     document.getElementById("titulosEmitidos").innerHTML = result;
@@ -156,9 +160,10 @@ function registraEventos(eventos){
   eventos.forEach(evento => {
     let linha = document.createElement("li");
     linha.innerHTML = 
-      "<b>" +evento.returnValues._operacao + "</b>" +
+      "<b style='color:red'>" +evento.returnValues._operacao + "</b>" +
       " - ID: " + evento.returnValues._id + 
-      " - Valor: " + evento.returnValues._valor +
+      " - Valor: " + evento.returnValues._valor + " wei" +
+      " - Taxa: " + evento.returnValues._taxa + " wei" +
       " - Resgatado: " + evento.returnValues._pago +
       " - Negociável: " + evento.returnValues._negociavel +
       " - Transação: " + "<a href='https://sepolia.etherscan.io/tx/"+ evento.transactionHash +"'>" + evento.transactionHash + "</a>";

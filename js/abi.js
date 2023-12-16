@@ -39,6 +39,13 @@ var abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "sacarSaldo",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -100,6 +107,12 @@ var abi = [
 				"internalType": "bool",
 				"name": "_negociavel",
 				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_taxa",
+				"type": "uint256"
 			}
 		],
 		"name": "TituloEmitido",

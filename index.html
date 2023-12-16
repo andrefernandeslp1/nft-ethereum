@@ -18,6 +18,8 @@
       <div>
         <p><b>Projeto:</b> Contrato Inteligente para emitir e administrar Títulos de Crédito NFT na rede Ethereum.</p>
         <p>Através deste contrato será possível emitir títulos de crédito que poderão ser resgatados futuramente, com <b>juros de 1% ao mês</b>, ou negociados entre os usuários.</p> 
+        <p>(<b style='color:red'>X</b>) Para sacar saldo do contrato, utilize ID = 0 em "Resgatar Título".<br>OBS: Somente o dono do contrato poderá sacar saldo.</p>
+        <!--<button id="btn-sacarSaldo">Sacar Saldo (somente dono do contrato)</button>-->
       </div>
       <div>
         <p>O Contrato será remunerado por meio de taxas, que serão:</p>
@@ -42,19 +44,19 @@
     
     <div class="corpo">
       <div class="col1">
-        <h4>Emitir Novo Título (E)</h4>
+        <h4>Emitir Novo Título (<b style='color:red'>E</b>)</h4>
         <input type="text" id="valor" placeholder="Valor do Título (mínimo = 100)">
         <button id="btn-emitir">Emitir</button>
 
-        <h4>Alterar Status Negociável (N)</h4>
+        <h4>Alterar Status Negociável (<b style='color:red'>N</b>)</h4>
         <input type="text" id="negociavel" placeholder="ID do Titulo">
         <button id="btn-negociavel">Definir</button>
 
-        <h4>Comprar Titulo Negociável (C)</h4>
+        <h4>Comprar Titulo Negociável (<b style='color:red'>C</b>)</h4>
         <input type="text" id="comprar" placeholder="ID do Titulo">
         <button id="btn-comprar">Comprar</button>
 
-        <h4>Resgatar Título (R)</h4>
+        <h4>Resgatar Título (<b style='color:red'>R</b>)</h4>
         <input type="text" id="resgatar" placeholder="ID do Titulo">
         <button id="btn-resgatar">Resgatar</button>
       </div>
@@ -69,7 +71,7 @@
         <br>
         <!--<span>Valor Atual:</span>-->
         <span id="output1"></span>
-        <br>
+        
       </div>
     </div>
 
@@ -84,8 +86,10 @@
     </fieldset>
 
     <div class="rodape" >
-      <span class="topico">Eventos:</span>
-      <br>
+        <span class="topico">Eventos:</span>
+      </div>
+      
+
       <ul id="eventos"></ul>
     </div>
     

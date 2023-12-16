@@ -24,21 +24,21 @@ contract TituloCredito {
   mapping(uint256 => Titulo) public titulosPorID;
   mapping(uint256 => address) public enderecoPorID;
 
-  event TituloEmitido(string _operacao, uint256 _id, address _portador, uint256 _valor, uint256 _time, bool _pago, bool _negociavel);
+  event TituloEmitido(string _operacao, uint256 _id, address _portador, uint256 _valor, uint256 _time, bool _pago, bool _negociavel, uint256 _taxa);
 
   constructor() {
     owner = msg.sender;
   }
 
   function emitirNovoTitulo(uint256 _valor) external payable {
-    uint256 valorTaxado = _valor - (_valor * TAXA_DE_EMISSAO / 100);
+    uint256 valorTaxado = _valor - ((_valor * TAXA_DE_EMISSAO) / 100);
     require(msg.value == _valor, "Valor incorreto");
     require(_valor >= 10, "Valor minimo de 100");
     idTitulo++;
     titulosPorID[idTitulo] = Titulo(idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
     enderecoPorID[idTitulo] = msg.sender;
     saldo += _valor;
-    emit TituloEmitido("E", idTitulo, msg.sender, valorTaxado, block.timestamp, false, false);
+    emit TituloEmitido("E", idTitulo, msg.sender, valorTaxado, block.timestamp, false, false, (_valor * TAXA_DE_EMISSAO) / 100);
   }
 
   function setNegociavel (uint256 _id) public {
@@ -50,7 +50,7 @@ contract TituloCredito {
     else {
       titulosPorID[_id].negociavel = false;
     }
-    emit TituloEmitido("N", _id, msg.sender, getValorAtual(_id), block.timestamp, false, titulosPorID[_id].negociavel);
+    emit TituloEmitido("N", _id, msg.sender, getValorAtual(_id), block.timestamp, false, titulosPorID[_id].negociavel, 0);
   }
 
   function comprarTituloNegociavel (uint256 _id) public payable {
@@ -64,7 +64,7 @@ contract TituloCredito {
     titulosPorID[_id] = Titulo(_id, msg.sender, valorLiquido, block.timestamp, false, false);
     enderecoPorID[_id] = msg.sender;
     saldo += txTransferencia;
-    emit TituloEmitido("C", _id, msg.sender, valorLiquido, block.timestamp, false, false);
+    emit TituloEmitido("C", _id, msg.sender, valorLiquido, block.timestamp, false, false, txTransferencia);
   }
 
   function resgatarTitulo(uint256 _id) public payable {
@@ -79,8 +79,16 @@ contract TituloCredito {
     titulosPorID[_id].pago = true;
     titulosPorID[_id].negociavel = false;
     saldo -= (valorLiquido);
-    emit TituloEmitido("R", _id, msg.sender, valorLiquido, block.timestamp, true, false);
+    emit TituloEmitido("R", _id, msg.sender, valorLiquido, block.timestamp, true, false, txResgate);
   } 
+
+  function sacarSaldo() public payable {
+    require(msg.sender == owner, "Somente o dono do contrato pode resetar");
+    saldo = 0;
+    //transferir saldo para owner
+    payable(owner).transfer(address(this).balance);
+    emit TituloEmitido("X", 0, msg.sender, 0, block.timestamp, false, false, 0);
+  }
 
   function getValorAtual(uint256 _id) public view returns (uint256) {
     uint256 meses = (block.timestamp - titulosPorID[_id].time) / 30 days;
