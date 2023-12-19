@@ -1,4 +1,6 @@
 # Títulos de Crédito NFT
+### Contrato Inteligente para emitir e administrar Títulos de Crédito NFT na rede Ethereum.  
+  
 UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE  
 INSTITUTO METRÓPOLE DIGITAL  
 IMD0913 - BLOCKCHAIN E APLICAÇÕES DESCENTRALIZADAS - T01 (2023.2)  
