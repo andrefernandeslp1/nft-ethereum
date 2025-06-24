@@ -7,7 +7,7 @@ IMD0913 - BLOCKCHAIN E APLICAÇÕES DESCENTRALIZADAS - T01 (2023.2)
 PROFESSOR: 	DANILO CURVELO DE SOUZA  
 Grupo 5: André Augusto Fernandes & Edvaldo Dantas de Medeiros Júnior.  
 Link Repositório: https://github.com/andrefernandeslp1/NFT-Ethereum/  
-Link Gitpages: https://andrefernandeslp1.github.io/NFT-Ethereum/  
+Link Gitpages: https://andrefernandeslp1.github.io/nft-ethereum  
 
 ![image](https://raw.githubusercontent.com/andrefernandeslp1/nft/main/auxiliares/Capturar.PNG)
 
